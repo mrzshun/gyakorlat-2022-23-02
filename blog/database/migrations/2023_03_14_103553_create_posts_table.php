@@ -14,6 +14,14 @@ return new class extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->string('title');
+            $table->text('text');
+            $table->string('description')->nullable();
+            $table->boolean('hidden')->default(false);
+
+            $table->unsignedBigInteger('author_id')->nullable();
+            $table->foreign('author_id')->references('id')->on('users')->onDelete('cascade');
+            //title, text, description, hidden, author (user táblára hivatkozunk)
         });
     }
 
