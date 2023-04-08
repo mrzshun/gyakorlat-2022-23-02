@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     use HasFactory;
+    
+    public static $styles = ['primary','secondary','success','danger','warning','info','light','dark'];
 
     public function posts()
     {

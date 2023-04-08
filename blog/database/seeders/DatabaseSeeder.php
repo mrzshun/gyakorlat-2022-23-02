@@ -16,7 +16,9 @@ class DatabaseSeeder extends Seeder
         $categories = \App\Models\Category::factory(10)->create();
         for($i = 0; $i<10; $i++) {
             $post = \App\Models\Post::factory()->create();
-            $post->author()->associate($users->random())->save();
+            if(rand(1,10)>5) {
+                $post->author()->associate($users->random())->save();
+            }
             $post->categories()->sync(
                 $categories->random(
                     rand(1,$categories->count())

@@ -4,6 +4,9 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+use App\Models\Category;
+
+
 return new class extends Migration
 {
     /**
@@ -15,8 +18,7 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string('name');
-            $table->string('txt_color',9);
-            $table->string('bg_color',9);
+            $table->enum('style', Category::$styles);
         });
     }
 
