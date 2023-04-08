@@ -29,3 +29,40 @@ Post-Category: N-N
 http://webprogramozas.inf.elte.hu/#!/subjects/webprog-server/handouts/laravel-04-rel%C3%A1ci%C3%B3k
 
 https://laravel.com/docs/10.x/collections
+
+Pár dokumentáció és link összeszedve, ami a videos órához kell:
+
+Laravel UI:
+https://github.com/szerveroldali/blog_basic_assets 
+
+Laravel Frontend:
+
+https://laravel.com/docs/10.x/frontend
+Bármelyikkel lehet a beadandót csinálni, vagy indulhattok a gyakorlati kezdőcsomagból is.
+Laravel Vite:
+https://laravel.com/docs/10.x/vite
+Bootstrap 5 doksi:
+https://getbootstrap.com/docs/5.0/getting-started/introduction/ 
+Laravel blade - sections, yield:
+https://laravel.com/docs/10.x/blade#layouts-using-template-inheritance
+
+Laravel HTTP redirect
+https://laravel.com/docs/10.x/redirects
+https://laravel.com/docs/10.x/responses#redirects
+
+Laravel Controllerek, Resource Controllerek:
+https://laravel.com/docs/10.x/controllers
+https://laravel.com/docs/10.x/controllers#resource-controllers
+
+CSRF sebezhetőség doksi:
+https://owasp.org/www-community/attacks/csrf
+
+Laravel validáció
+https://laravel.com/docs/10.x/validation
+https://laravel.com/docs/10.x/validation#available-validation-rules
+
+Bootstrap form validációhoz használt komponensek
+https://getbootstrap.com/docs/5.0/forms/validation/
+
+Laravel Session
+https://laravel.com/docs/10.x/session
