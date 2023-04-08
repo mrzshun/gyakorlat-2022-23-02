@@ -3,6 +3,18 @@ https://laravel.com/docs/10.x
 https://laravel.com/docs/10.x/eloquent
 https://laravel.com/docs/10.x/collections
 
+Hogyan installáld a projektet (frontenddel együtt)?
+
+1. git clone git@github.com:mrzshun/gyakorlat-2022-23-02.git
+2. cd gyakorlat-2022-23-02/blog 
+3. composer install
+4. .env fájl készítése a blog könyvtárba, abba a .env.example bemásolása
+5. php artisan key:generate
+6. npm i //frontend telepítése 
+7. npm i -D @fortawesome/fontawesome-free //font telepítése ikonokhoz
+8. npm run dev -- build
+9. php artisan migrate --seed //adatbázis fájl létrehozásához "yes"
+
 CRUD:
 Create, Read, Update, Delete
 
