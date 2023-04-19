@@ -19,7 +19,11 @@
         </div>
     </div>
 
-    {{-- TODO: Session flashes --}}
+    @if (Session::has('post_deleted'))
+    <div class="alert alert-primary">
+        <span>You have successfully created this post:</span>
+    </div>
+@endif
 
     <div class="row mt-3">
         <div class="col-12 col-lg-9">
@@ -63,7 +67,7 @@
                             </div>
                             <div class="card-footer">
                                 {{-- TODO: Link --}}
-                                <a href="#" class="btn btn-primary">
+                                <a href="{{route('posts.show',$post)}}" class="btn btn-primary">
                                     <span>View post</span> <i class="fas fa-angle-right"></i>
                                 </a>
                             </div>

@@ -14,6 +14,9 @@ Hogyan installáld a projektet (frontenddel együtt)?
 7. npm i -D @fortawesome/fontawesome-free //font telepítése ikonokhoz
 8. npm run dev -- build
 9. php artisan migrate --seed //adatbázis fájl létrehozásához "yes"
+10. php artisan migrate //yes a db létrehozására
+11. php artisan db:seed
+12. php artisan serve //blog könyvtár gyökerében
 
 CRUD:
 Create, Read, Update, Delete
@@ -78,3 +81,7 @@ https://getbootstrap.com/docs/5.0/forms/validation/
 
 Laravel Session
 https://laravel.com/docs/10.x/session
+
+
+
+http://webprogramozas.inf.elte.hu/#!/subjects/webprog-server/handouts/laravel-05-hiteles%C3%ADt%C3%A9s

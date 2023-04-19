@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Session;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -32,6 +33,9 @@ class PostController extends Controller
      */
     public function create()
     {
+        // if(!Auth::check()){
+        //     return redirect('posts');
+        // }
         return view('posts.create',[
             'categories' => Category::all(),
         ]);
@@ -69,10 +73,11 @@ class PostController extends Controller
             'description' => $validated['description'],
             'text' => $validated['text'],
             'cover_image_path' => $cover_image_path,
+            'author_id' => $request->user()->id, //Auth::id() vagy: $post->author()->associate(Auth::user()) + mentés
         ]);
         isset($validated['categories']) ? $post->categories()->sync($validated['categories']) : "";
         Session::flash('post_created',$validated['title']);
-        return redirect()->route('posts.create');
+        return redirect()->route('posts.show',$post);
         //
     }
 
@@ -81,7 +86,9 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        return view('posts.show',[
+            'post' => $post,
+        ]); //
     }
 
     /**
@@ -89,7 +96,10 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        return view('posts.edit',[
+            'post' => $post,
+            'categories' => Category::all(),
+        ]); //
     }
 
     /**
@@ -105,6 +115,9 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        $this->authorize('delete',$post);
+        Session::flash('post_deleted',$post['title']);
+        $post->delete();
+        return redirect()->route('posts.index');
     }
 }
