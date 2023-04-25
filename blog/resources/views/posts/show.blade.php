@@ -11,6 +11,12 @@
             </div>
         @endif
 
+        @if (Session::has('post_updated'))
+            <div class="alert alert-primary">
+                <span>You have successfully edited this post:</span>
+            </div>
+        @endif
+
 
         <div class="row justify-content-between">
             <div class="col-12 col-md-8">
@@ -43,8 +49,9 @@
 
                     {{-- TODO: Links, policy --}}
                     @can('update', $post)
-                    <a role="button" class="btn btn-sm btn-primary" href="{{route('posts.edit',$post)}}"><i class="far fa-edit"></i> Edit
-                        post</a>
+                        <a role="button" class="btn btn-sm btn-primary" href="{{ route('posts.edit', $post) }}"><i
+                                class="far fa-edit"></i> Edit
+                            post</a>
                     @endcan
 
                     @can('delete', $post)
@@ -78,7 +85,8 @@
                         </button>
 
                         {{-- TODO: Route, directives --}}
-                        <form id="delete-post-form" action="{{ route('posts.destroy',$post)}}" method="POST" class="d-none">
+                        <form id="delete-post-form" action="{{ route('posts.destroy', $post) }}" method="POST"
+                            class="d-none">
                             @method('DELETE')
                             @csrf
                         </form>

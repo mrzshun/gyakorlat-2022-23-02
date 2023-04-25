@@ -21,7 +21,7 @@
 
     @if (Session::has('post_deleted'))
     <div class="alert alert-primary">
-        <span>You have successfully created this post:</span>
+        <span>You have successfully deleted the post!</span>
     </div>
 @endif
 
@@ -83,7 +83,7 @@
             </div>
 
             <div class="d-flex justify-content-center">
-                {{-- TODO: Pagination --}}
+                {{ $posts->links() }}
             </div>
 
         </div>

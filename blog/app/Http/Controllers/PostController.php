@@ -9,6 +9,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
+
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -22,7 +24,7 @@ class PostController extends Controller
     public function index()
     {
         return view('posts.index',[
-            'posts' => Post::all(),
+            'posts' => Post::paginate(6),
             'categories' => Category::all(),
             'users' => User::all(),
         ]);
@@ -107,7 +109,44 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+        $validated = $request->validate(
+            [
+                'title' => 'required',
+                'description' => 'required',
+                'text' => 'required',
+                'categories' => 'nullable|array',
+                'categories.*' =>  'numeric|integer|exists:categories,id',
+                'cover_image' => 'nullable|file|mimes:jpg,png|max:4096',
+                'remove_cover_image' => 'nullable|boolean',
+            ],
+            [
+                'title.required' => "The title field is required",
+                'description.required' => "The description field is required",
+                'text.required' => "The text field is required",
+            ]
+        );
+        $cover_image_path = $post->cover_image_path;
+        if(isset($validated['remove_cover_image'])){
+            $cover_image_path = null;
+        }
+        elseif($request->hasFile('cover_image')){
+            $file = $request->file('cover_image');
+            $cover_image_path = 'cover_image_'.Str::random(10).'.'.$file->getClientOriginalExtension();
+            Storage::disk('public')->put($cover_image_path,$file->get());
+        }
+        if($cover_image_path != $post->cover_image_path && $post->cover_image_path != null) {
+            Storage::disk('public')->delete($post->cover_image_path);
+        }
+
+        $post->title = $validated['title'];
+        $post->description = $validated['description'];
+        $post->text = $validated['text'];
+        $post->cover_image_path = $cover_image_path;
+        $post->save();
+
+        isset($validated['categories']) ? $post->categories()->sync($validated['categories']) : "";
+        Session::flash('post_updated',$validated['title']);
+        return redirect()->route('posts.show',$post);
     }
 
     /**
@@ -117,6 +156,10 @@ class PostController extends Controller
     {
         $this->authorize('delete',$post);
         Session::flash('post_deleted',$post['title']);
+        //TODO: delete cover_picture if exists!
+        if($post->cover_image_path != null) {
+            Storage::disk('public')->delete($post->cover_image_path);
+        }
         $post->delete();
         return redirect()->route('posts.index');
     }
