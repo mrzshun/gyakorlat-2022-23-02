@@ -17,3 +17,6 @@ DELETE /categories/:id //kitöröl egy kategóriát ID alapján
 Fastify:
 
 https://www.fastify.io/docs/latest/Reference/Validation-and-Serialization/
+
+Regexp:
+https://regex101.com/ - regexp teszteléshez tool

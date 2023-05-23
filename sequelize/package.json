@@ -3,6 +3,7 @@
     "db": "npx rimraf database/database.sqlite && npx sequelize db:migrate && npx sequelize db:seed:all"
   },
   "dependencies": {
+    "@fastify/jwt": "^6.7.1",
     "fastify": "^4.17.0",
     "md5": "^2.3.0",
     "sequelize": "^6.31.1",

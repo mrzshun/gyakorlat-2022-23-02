@@ -18,7 +18,7 @@ module.exports = {
                 users.push(
                     await User.create({
                         name: firstName.concat(" ", lastName),
-                        email: faker.internet.email(firstName, lastName),
+                        email: "user".concat(i).concat("@szerveroldali.com"),
                         password: md5('password'),
                     })
                 );
