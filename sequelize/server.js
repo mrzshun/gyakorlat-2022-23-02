@@ -1,5 +1,7 @@
 // Require the framework and instantiate it
 const fastify = require('fastify')({ logger: true })
+const { readFileSync } = require('fs');
+const mercurius = require('mercurius');
 
 const md5 = require('md5');
 
@@ -8,6 +10,14 @@ const { User, Post, Category } = require('./models');
 fastify.register(require('@fastify/jwt'), {
     secret: 'secret'
 })
+
+
+fastify.register(mercurius, {
+  schema: readFileSync('./graphql/schema.gql').toString(),
+  resolvers: require('./graphql/resolvers'),
+  graphiql: true,
+})
+
 
 fastify.decorate("authenticate", async function (request, reply) {
     try {

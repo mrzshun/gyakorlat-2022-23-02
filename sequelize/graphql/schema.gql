@@ -1,0 +1,29 @@
+scalar Date
+
+type Query {
+    add(x: Int, y: Int): Int
+    hello: String
+    alma: String
+    korte: String
+    categories: [Category]
+    posts: [Post]
+}
+
+type Category {
+    id:Int!
+    name: String!
+    color: String!
+    createdAt: Date!
+    updatedAt: Date!
+}
+
+type Post {
+    id:Int!
+    title: String!
+    description: String!
+    text:String
+    userId:Int
+    createdAt:Date!
+    updatedAt:Date!
+    categories:[Category]
+}
